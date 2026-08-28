@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- §6.9 Home Screen Widget: last summary snippet + listening state, periodic-refresh only —
+     Android widgets can't do live word-by-word updates. -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="250dp"
+    android:minHeight="60dp"
+    android:updatePeriodMillis="1800000"
+    android:resizeMode="horizontal|vertical"
+    android:widgetCategory="home_screen" />

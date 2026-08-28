@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HearAI</string>
+    <string name="app_tagline">AI Hearing Assist</string>
+
+    <string name="notification_channel_listening_name">Active listening</string>
+    <string name="notification_channel_listening_description">Shows when HearAI is transcribing audio in the background.</string>
+    <string name="notification_listening_title">HearAI is listening</string>
+    <string name="notification_listening_text_idle">Waiting for speech…</string>
+    <string name="notification_listening_text_active">Transcribing…</string>
+    <string name="notification_action_stop">Stop</string>
+
+    <!-- §5 API Key Management (BYOK) — real disclosure, shown before mic permission is granted -->
+    <string name="privacy_disclosure">
+        Your Gemini API key\'s free-tier terms apply. Google may use free-tier audio/text to
+        improve their models unless your key is on a billing-linked tier. Everyone whose voice is
+        picked up while you\'re listening is subject to this.
+    </string>
+
+    <string name="onboarding_welcome_body">HearAI listens to conversations, transcribes in real time, and summarizes what was said.</string>
+    <string name="onboarding_welcome_cta">Get started</string>
+
+    <string name="audio_privacy_footer">Your audio stays private. HearAI only sends audio to Gemini Live for transcription and never stores it.</string>
+
+    <string name="accessibility_service_description">Lets HearAI draw a movable caption bubble over other apps while a session is active.</string>
+</resources>
