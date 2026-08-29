@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';" />
+    <title>HearAI Desktop</title>
+    <style>
+      * { box-sizing: border-box; }
+      body { font: 14px "Segoe UI", system-ui, sans-serif; margin: 0; padding: 18px; background: #1c1c1f; color: #eee; }
+      h1 { font-size: 16px; margin: 0 0 4px; }
+      .sub { color: #999; font-size: 12px; margin-bottom: 16px; }
+      fieldset { border: 1px solid #333; border-radius: 8px; margin: 0 0 14px; padding: 10px 12px; }
+      legend { color: #9ab; font-size: 12px; padding: 0 4px; }
+      label { display: block; margin: 6px 0 3px; color: #ccc; }
+      input[type=text], input[type=password], select { width: 100%; padding: 7px; background: #111; border: 1px solid #444; border-radius: 6px; color: #eee; }
+      input[type=range] { width: 100%; }
+      .row { display: flex; gap: 14px; align-items: center; }
+      .row label { margin: 0; }
+      .val { color: #8a8; font-variant-numeric: tabular-nums; }
+      button { padding: 9px 14px; border: 0; border-radius: 6px; background: #3b6ea5; color: #fff; cursor: pointer; font-size: 14px; }
+      button.secondary { background: #333; }
+      #status { margin-top: 10px; font-size: 13px; }
+      .ok { color: #6c6; } .err { color: #e77; } .dim { color: #999; }
+      kbd { background: #333; border-radius: 4px; padding: 1px 5px; font-family: inherit; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <h1>HearAI Desktop</h1>
+    <div class="sub">Real-time caption overlay that follows your cursor.</div>
+
+    <fieldset>
+      <legend>Gemini API key</legend>
+      <input id="apiKey" type="password" placeholder="AIza…" autocomplete="off" />
+      <div style="margin-top:8px"><button id="saveKey" class="secondary">Save key</button> <span id="keyState" class="dim"></span></div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Audio source</legend>
+      <div class="row">
+        <label><input type="radio" name="src" value="system" /> Meeting / system audio</label>
+        <label><input type="radio" name="src" value="mic" /> Microphone</label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Caption box position</legend>
+      <div class="row">
+        <label><input type="radio" name="pos" value="follow" /> Follow cursor</label>
+        <label><input type="radio" name="pos" value="pinned" /> Pinned</label>
+      </div>
+      <div id="pinnedRow" style="margin-top:8px">
+        <div class="row">
+          <div style="flex:1"><label>Pinned X <span id="pxv" class="val"></span></label><input id="px" type="range" min="0" max="3000" /></div>
+          <div style="flex:1"><label>Pinned Y <span id="pyv" class="val"></span></label><input id="py" type="range" min="0" max="2000" /></div>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Appearance</legend>
+      <label>Font size <span id="fsv" class="val"></span></label>
+      <input id="fontSize" type="range" min="11" max="30" />
+      <label>Box width <span id="bwv" class="val"></span></label>
+      <input id="boxWidth" type="range" min="280" max="900" />
+      <label>Opacity <span id="opv" class="val"></span></label>
+      <input id="opacity" type="range" min="40" max="100" />
+      <label>Lines shown <span id="mlv" class="val"></span></label>
+      <input id="maxLines" type="range" min="1" max="5" />
+      <label style="margin-top:10px"><input id="hideShare" type="checkbox" /> Hide caption box from screen shares / recordings</label>
+      <label><input id="romanize" type="checkbox" /> Always show captions in English letters (romanize — e.g. "tu kaisa hai")</label>
+      <label>VAD sensitivity</label>
+      <select id="vad"><option value="low">Low</option><option value="medium">Medium</option><option value="high">High</option></select>
+    </fieldset>
+
+    <button id="toggle">Start listening</button>
+    <div id="status" class="dim">Stopped.</div>
+    <div class="sub" style="margin-top:12px">
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd> start/stop &nbsp;·&nbsp;
+      <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> follow/pin
+    </div>
+
+    <script type="module" src="./settings.js"></script>
+  </body>
+</html>

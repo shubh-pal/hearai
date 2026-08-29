@@ -8,11 +8,22 @@ your meetings in real time. Bring your own Gemini API key; nothing is stored off
 | Platform | File | Notes |
 |---|---|---|
 | Android 12+ | `HearAI-1.0.apk` | Sideload — allow "install from unknown source" |
-| Windows 10+ (x64) | `HearAI-Desktop-Setup-0.1.0.exe` | NSIS installer; SmartScreen will warn (unsigned) — "More info" → "Run anyway" |
-| macOS 12+ (Apple Silicon) | `HearAI-Desktop-0.1.0-arm64.dmg` | Unsigned — right-click the app → **Open** the first time |
+| Windows 10+ (x64) | `HearAI-Desktop-Setup-0.1.0.exe` | NSIS installer; SmartScreen will warn — "More info" → "Run anyway" |
+| macOS 12+ (Apple Silicon) | `HearAI-Desktop-0.1.0-arm64.dmg` | Ad-hoc signed, not notarized — see below |
 | macOS 12+ (Intel) | `HearAI-Desktop-0.1.0-x64.dmg` | Same |
 
 `SHA256SUMS.txt` lists the checksum for each file.
+
+### Opening HearAI Desktop on macOS
+
+Drag it to **Applications**, then run once in Terminal:
+
+```bash
+xattr -dr com.apple.quarantine "/Applications/HearAI Desktop.app"
+```
+
+Or right-click the app → **Open** and confirm the dialog. (The build is ad-hoc signed but not
+notarized, so Gatekeeper asks the first time.)
 
 ## What's inside
 

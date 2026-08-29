@@ -42,16 +42,30 @@ fi
   --ks-pass "pass:$KS_PASS" --key-pass "pass:$KS_PASS" "$out/HearAI-$APP_VER.apk"
 "$BT/apksigner" verify "$out/HearAI-$APP_VER.apk"
 
-echo "==> Desktop (macOS dmg + Windows exe)"
+echo "==> Desktop — Windows exe"
 ( cd desktop
   [ -d node_modules ] || npm ci
-  CSC_IDENTITY_AUTO_DISCOVERY=false ./node_modules/.bin/electron-builder --mac
   ./node_modules/.bin/electron-builder --win --x64
 )
-cp "desktop/dist/HearAI Desktop-$DESK_VER-arm64.dmg"       "$out/HearAI-Desktop-$DESK_VER-arm64.dmg"
-cp "desktop/dist/HearAI Desktop-$DESK_VER.dmg"             "$out/HearAI-Desktop-$DESK_VER-x64.dmg"
 cp "desktop/dist/HearAI Desktop Setup $DESK_VER.exe"       "$out/HearAI-Desktop-Setup-$DESK_VER.exe"
 
-( cd "$out" && shasum -a 256 * > SHA256SUMS.txt )
+echo "==> Desktop — macOS .app (unpacked), ad-hoc sign, then dmg"
+# electron-builder 25 won't ad-hoc sign, and an UNSIGNED arm64 app triggers the
+# "is damaged and can't be opened" Gatekeeper dead-end. So: build --dir, sign with
+# the ad-hoc identity (`-`) ourselves — that gets a valid signature and the milder,
+# bypassable "unidentified developer" prompt — then pack a plain UDZO dmg.
+( cd desktop && ./node_modules/.bin/electron-builder --mac --dir )
+for pair in "mac-arm64:arm64" "mac:x64"; do
+  dir="${pair%%:*}"; arch="${pair##*:}"
+  app="desktop/dist/$dir/HearAI Desktop.app"
+  codesign --force --deep --sign - "$app"
+  codesign --verify --deep --strict "$app"
+  stage="$(mktemp -d)"; cp -R "$app" "$stage/"; ln -s /Applications "$stage/Applications"
+  hdiutil create -volname "HearAI Desktop" -srcfolder "$stage" -ov -format UDZO \
+    "$out/HearAI-Desktop-$DESK_VER-$arch.dmg" >/dev/null
+  rm -rf "$stage"
+done
+
+( cd "$out" && shasum -a 256 HearAI-* > SHA256SUMS.txt )
 echo "==> Done:"
 ls -lh "$out"

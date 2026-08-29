@@ -1,0 +1,42 @@
+:root { --fs: 15px; --op: 0.92; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  background: transparent;
+  overflow: hidden;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+#box {
+  position: absolute;
+  left: 8px; right: 8px; bottom: 8px;
+  max-height: calc(100% - 16px);
+  background: rgba(18, 18, 20, var(--op));
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  color: #fff;
+  font: 400 var(--fs)/1.35 "Segoe UI", system-ui, -apple-system, sans-serif;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+#lines { display: flex; flex-direction: column; gap: 2px; }
+#lines .final { color: #fff; }
+#lines .interim { color: rgba(255, 255, 255, 0.62); }
+
+#hint {
+  font-size: calc(var(--fs) * 0.8);
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 2px;
+}
+
+#box.active #hint { display: none; }
+#box.idle #lines { display: none; }
+#box.stale { opacity: 0.45; transition: opacity 0.4s; }
+
+#box.error { border-color: rgba(255, 120, 120, 0.6); }
+#box.error #hint { color: rgba(255, 150, 150, 0.9); display: block; }
