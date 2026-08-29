@@ -10,3 +10,15 @@
 local.properties
 *.hprof
 .kotlin/
+
+# Build outputs
+/app/build/
+/dist/
+/desktop/dist/
+/desktop/node_modules/
+/release-artifacts/
+
+# Signing — keep these safe and OUT of git
+*.keystore
+*.jks
+Untitled.zip
