@@ -148,11 +148,19 @@
   .dl .meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:rgba(250,247,242,.42);text-align:center}
   .get .disclaimer{margin-top:26px;font-size:14.5px;line-height:1.6;color:rgba(250,247,242,.55);max-width:680px}
 
-  /* maker */
-  .maker{display:grid;grid-template-columns:1.5fr .5fr;gap:48px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:48px 52px;margin-bottom:80px}
-  .maker h2{font-size:32px;line-height:1.15}
-  .maker p{margin-top:16px;max-width:520px;font-size:16.5px;line-height:1.65;color:var(--ink-2)}
-  .maker .mono-mark{width:118px;height:118px;border-radius:28px;background:var(--purple);color:var(--bg);display:flex;align-items:center;justify-content:center;font-size:40px;font-weight:600;letter-spacing:-.02em;margin-left:auto}
+  /* story */
+  .story{display:grid;grid-template-columns:1.12fr .88fr;gap:48px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:26px;padding:52px 56px;margin-bottom:80px}
+  .story h2{font-size:33px;line-height:1.16}
+  .story h2 .d{color:var(--purple)}
+  .story-body{margin-top:20px;display:grid;gap:13px;max-width:520px}
+  .story-body p{font-size:15.5px;line-height:1.65;color:var(--ink-2)}
+  .story-body a{font-weight:500;text-decoration:underline;text-underline-offset:2px}
+  .story-chips{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0}
+  .story-chip{display:flex;align-items:center;gap:10px;background:var(--bg);border:1px solid var(--card-line);border-radius:13px;padding:11px 15px}
+  .story-chip svg{width:17px;height:17px;color:var(--purple);flex:none}
+  .story-chip b{display:block;font-size:13.5px;font-weight:600;letter-spacing:-.01em}
+  .story-chip i{font-style:normal;font-size:12px;color:var(--ink-3)}
+  .story-art img{width:100%;height:auto;display:block}
 
   footer{border-top:1px solid var(--line);padding:44px 0 60px;display:flex;flex-wrap:wrap;gap:40px;justify-content:space-between;align-items:flex-start}
   footer .col{display:grid;gap:10px;font-size:14.5px}
@@ -178,8 +186,10 @@
     .feature:nth-child(even) .feature-media{order:0}
     .band{grid-template-columns:1fr;gap:28px;padding:36px 26px}
     .cards-3{grid-template-columns:1fr}
-    .maker{grid-template-columns:1fr;gap:26px;padding:36px 26px}
-    .maker .mono-mark{margin:0}
+    .story{grid-template-columns:1fr;gap:24px;padding:34px 24px}
+    .story::after{display:none}
+    .story-art{max-width:320px;margin:0 auto;order:-1}
+    .story h2{font-size:27px}
     .downloads{grid-template-columns:1fr}
     .get{padding:44px 26px}
   }
@@ -196,7 +206,7 @@
       <a href="#desktop">Desktop</a>
       <a href="#languages">Languages</a>
       <a href="#faq">FAQ</a>
-      <a href="#maker">Maker</a>
+      <a href="#story">Story</a>
       <a href="https://github.com/shubh-pal/hearai">GitHub</a>
       <a href="#get" class="nav-cta">Download</a>
     </nav>
@@ -351,15 +361,37 @@
     then open it normally. SHA-256 checksums are on the <a href="https://github.com/shubh-pal/hearai/releases/latest" style="color:var(--bg);text-decoration:underline">release page</a>; the full source is on <a href="https://github.com/shubh-pal/hearai" style="color:var(--bg);text-decoration:underline">GitHub</a> if you'd rather build it yourself.</p>
   </section>
 
-  <section id="maker">
-    <div class="maker">
-      <div>
+  <section id="story">
+    <div class="story">
+      <div class="story-copy">
         <div class="kicker">Who's behind this</div>
-        <h2 class="big">Made by Shubh Palan</h2>
-        <p>HearAI is a solo, open-source project — the Android app, the desktop overlay and this page. I like building products end to end, from the first idea to the thing you install. If that's your kind of thing, take a look at what else I've made.</p>
-        <a href="https://shubh.websight.pro" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:26px">Visit my portfolio →</a>
+        <h2 class="big">Why the captions follow your cursor<span class="d">.</span></h2>
+        <div class="story-body">
+          <p>I built HearAI, but the reason it exists is my cousin, <a href="https://www.linkedin.com/in/pranav-dawda-202417216/" target="_blank" rel="noopener">Pranav</a>.</p>
+          <p>Pranav has partial hearing loss and works full-time at an organization where his days are back-to-back meetings — most of them on screen shares, where he has to follow the shared content and the conversation at once.</p>
+          <p>Real-time meeting captions don't solve it for him: they sit at the bottom of the screen, so he's stuck choosing between reading the transcript and watching what's being shared.</p>
+          <p>When I gave him the HearAI mobile app, he asked — could you build this for meetings, with the transcription stuck to the mouse cursor, so I don't have to keep looking away from the content?</p>
+          <p>I told him it was completely possible, and built the desktop version for him.</p>
+        </div>
+        <div class="story-chips">
+          <span class="story-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            <span><b>Engineer</b><i>by craft</i></span>
+          </span>
+          <span class="story-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91 0z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            <span><b>Builder</b><i>by choice</i></span>
+          </span>
+          <span class="story-chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span><b>Open-source</b><i>by heart</i></span>
+          </span>
+        </div>
+        <a href="https://shubh.websight.pro" target="_blank" rel="noopener" class="btn btn-primary">Visit my portfolio →</a>
       </div>
-      <div class="mono-mark">SP</div>
+      <div class="story-art">
+        <img src="assets/me.png" alt="Line-art portrait of Shubh Palan, the maker of HearAI, with a handwritten signature" width="1281" height="1228">
+      </div>
     </div>
   </section>
 
